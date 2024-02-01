@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16-alpine3.18
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: nazordz
+      POSTGRES_USER: nazordz
+      POSTGRES_DB: test-docker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  redis-stack:
+    image: redis/redis-stack:7.2.0-v8
+    volumes:
+      - redis_data:/data
+    ports:
+      - 6379:6379
+      - 8001:8001
+  # redis-server:
+  #   image: redis:7.2.4-alpine3.19
+  #   restart: always
+  #   volumes:
+  #     - redis_data:/data
+  #   ports:
+  #     - "6379:6379"
+
+volumes:
+  pgdata:
+  redis_data:
